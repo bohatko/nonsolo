@@ -1,0 +1,32 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "category_produkt",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_show",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "order_to",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "produkt",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "category_ID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "type",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    }
+  ]
+}
