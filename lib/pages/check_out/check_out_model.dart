@@ -22,11 +22,24 @@ class CheckOutModel extends FlutterFlowModel {
 
   CountOrderRecord? orderNumber;
 
+  ///  State fields for stateful widgets in this page.
+
+  final unfocusNode = FocusNode();
+  // Model for Cart_is_empty component.
+  late CartIsEmptyModel cartIsEmptyModel;
+
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    cartIsEmptyModel = createModel(context, () => CartIsEmptyModel());
+  }
 
-  void dispose() {}
+  void dispose() {
+    unfocusNode.dispose();
+    cartIsEmptyModel.dispose();
+  }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

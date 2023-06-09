@@ -63,6 +63,8 @@ class CreateProductModel extends FlutterFlowModel {
     clonableURLController5?.dispose();
   }
 
+  /// Action blocks are added here.
+
   /// Additional helper methods are added here.
 
 }

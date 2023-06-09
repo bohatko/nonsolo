@@ -175,7 +175,9 @@ class _FogotPassWidgetState extends State<FogotPassWidget> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        'Email required!',
+                        FFLocalizations.of(context).getText(
+                          'a79kyi2g' /* Отправили сообщение на Вашу по... */,
+                        ),
                       ),
                     ),
                   );

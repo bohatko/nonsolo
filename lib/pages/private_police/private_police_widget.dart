@@ -76,29 +76,35 @@ class _PrivatePoliceWidgetState extends State<PrivatePoliceWidget> {
         centerTitle: true,
         elevation: 2.0,
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 20.0, 8.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        'c8b9vuiy' /* Текст */,
+      body: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            15.0, 15.0, 15.0, 15.0),
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            'ti2tkvuk' /* 1.1 Настоящая политика Конфиде... */,
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                    ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

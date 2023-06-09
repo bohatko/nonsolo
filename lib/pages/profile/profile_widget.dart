@@ -7,6 +7,7 @@ import '/pages/edit_profile/edit_profile_widget.dart';
 import '/pages/feedback/feedback_widget.dart';
 import '/pages/login/login_widget.dart';
 import '/pages/private_police/private_police_widget.dart';
+import '/pages/sign_up/sign_up_widget.dart';
 import '/pages/youre_orders/youre_orders_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   late ProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -58,7 +58,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -67,7 +66,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -664,6 +663,70 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            var confirmDialogResponse = await showDialog<bool>(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Удаление аккаунта!'),
+                                      content: Text(
+                                          'Внимание. Вы сейчас удаляете свой аккаунт. Восстановить его не получится! Все данные будут удалены безвозвратно!'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, false),
+                                          child: Text('Отмена'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, true),
+                                          child: Text('Подтвердить'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ) ??
+                                false;
+                            if (confirmDialogResponse) {
+                              await currentUserReference!.delete();
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpWidget(),
+                                ),
+                              );
+                            } else {
+                              return;
+                            }
+                          },
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              'qoap2fct' /* Удалить аккаунт */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: Color(0x9EE21C3D),
+                                  fontWeight: FontWeight.w600,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

@@ -42,7 +42,6 @@ class _ProduktMoreCopyWidgetState extends State<ProduktMoreCopyWidget>
   late ProduktMoreCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -56,7 +55,6 @@ class _ProduktMoreCopyWidgetState extends State<ProduktMoreCopyWidget>
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -93,7 +91,7 @@ class _ProduktMoreCopyWidgetState extends State<ProduktMoreCopyWidget>
                 ? produktMoreCopyCartsRecordList.first
                 : null;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBtnText,

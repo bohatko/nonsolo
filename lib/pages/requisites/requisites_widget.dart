@@ -89,7 +89,7 @@ class _RequisitesWidgetState extends State<RequisitesWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
-                        'pczaguye' /* Текст */,
+                        'pczaguye' /* улица Степана Разина, 91, Калу... */,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),

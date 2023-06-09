@@ -638,10 +638,6 @@ class _UpdateOrderWidgetState extends State<UpdateOrderWidget>
                                                                 val),
                                                         width: 300.0,
                                                         height: 50.0,
-                                                        searchHintTextStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium,
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -651,12 +647,6 @@ class _UpdateOrderWidgetState extends State<UpdateOrderWidget>
                                                                     context)
                                                                 .getText(
                                                           'ck8087iv' /* Please select... */,
-                                                        ),
-                                                        searchHintText:
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                          '5bg6haqb' /* Search for an item... */,
                                                         ),
                                                         icon: Icon(
                                                           Icons

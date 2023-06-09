@@ -30,7 +30,6 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
   late CheckOutModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -44,7 +43,6 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -84,7 +82,7 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
             ? checkOutCartsRecordList.first
             : null;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -309,268 +307,310 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                         ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 5.0),
-                                      child: StreamBuilder<
-                                          List<ProductDetailRecord>>(
-                                        stream: queryProductDetailRecord(
-                                          queryBuilder: (productDetailRecord) =>
-                                              productDetailRecord.where(
-                                                  'Cart_Ref',
-                                                  isEqualTo:
-                                                      checkOutCartsRecord!
-                                                          .reference),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitCircle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 50.0,
-                                                ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            StreamBuilder<
+                                                List<ProductDetailRecord>>(
+                                              stream: queryProductDetailRecord(
+                                                queryBuilder: (productDetailRecord) =>
+                                                    productDetailRecord.where(
+                                                        'Cart_Ref',
+                                                        isEqualTo:
+                                                            checkOutCartsRecord!
+                                                                .reference),
                                               ),
-                                            );
-                                          }
-                                          List<ProductDetailRecord>
-                                              listViewProductDetailRecordList =
-                                              snapshot.data!;
-                                          if (listViewProductDetailRecordList
-                                              .isEmpty) {
-                                            return CartIsEmptyWidget();
-                                          }
-                                          return ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                listViewProductDetailRecordList
-                                                    .length,
-                                            itemBuilder:
-                                                (context, listViewIndex) {
-                                              final listViewProductDetailRecord =
-                                                  listViewProductDetailRecordList[
-                                                      listViewIndex];
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 5.0, 15.0, 5.0),
-                                                child: Container(
-                                                  width: 80.0,
-                                                  height: 120.0,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                  ),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child: SpinKitCircle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        size: 50.0,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<ProductDetailRecord>
+                                                    columnProductDetailRecordList =
+                                                    snapshot.data!;
+                                                return Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      columnProductDetailRecordList
+                                                          .length,
+                                                      (columnIndex) {
+                                                    final columnProductDetailRecord =
+                                                        columnProductDetailRecordList[
+                                                            columnIndex];
+                                                    return Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  5.0,
+                                                                  5.0,
+                                                                  5.0,
+                                                                  0.0),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            1.0,
+                                                        height: 120.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBtnText,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                          border: Border.all(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .accent3,
+                                                          ),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      10.0,
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,
                                                                         10.0,
                                                                         0.0,
                                                                         10.0),
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20.0),
-                                                              child:
-                                                                  Image.network(
-                                                                listViewProductDetailRecord
-                                                                    .image,
-                                                                width: 100.0,
-                                                                height: 100.0,
-                                                                fit: BoxFit
-                                                                    .cover,
+                                                                child:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20.0),
+                                                                  child: Image
+                                                                      .network(
+                                                                    columnProductDetailRecord
+                                                                        .image,
+                                                                    width:
+                                                                        100.0,
+                                                                    height:
+                                                                        100.0,
+                                                                    fit: BoxFit
+                                                                        .contain,
+                                                                  ),
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           10.0,
                                                                           10.0,
                                                                           10.0,
                                                                           10.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    listViewProductDetailRecord
-                                                                        .name,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium,
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        columnProductDetailRecord
+                                                                            .name,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium,
+                                                                      ),
+                                                                      Text(
+                                                                        'Количество: ${columnProductDetailRecord.quantity.toString()}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium,
+                                                                      ),
+                                                                      Text(
+                                                                        'Цена: ${columnProductDetailRecord.price.toString()}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium,
+                                                                      ),
+                                                                      Text(
+                                                                        'Сумма: ${(columnProductDetailRecord.quantity * columnProductDetailRecord.price).toString()}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium,
+                                                                      ),
+                                                                    ],
                                                                   ),
-                                                                  Text(
-                                                                    'Количество: ${listViewProductDetailRecord.quantity.toString()}',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                  Text(
-                                                                    'Цена: ${listViewProductDetailRecord.price.toString()}',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                  Text(
-                                                                    'Сумма: ${(listViewProductDetailRecord.quantity * listViewProductDetailRecord.price).toString()}',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                ],
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        10.0,
-                                                                        0.0),
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            10.0,
+                                                                            0.0),
+                                                                child: InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
                                                                       .transparent,
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .leftToRight,
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            300),
-                                                                    reverseDuration:
-                                                                        Duration(
-                                                                            milliseconds:
-                                                                                300),
-                                                                    child:
-                                                                        ProduktMoreCopyWidget(
-                                                                      productDetail:
-                                                                          listViewProductDetailRecord,
-                                                                      product:
-                                                                          mainContainerProduktRecord,
-                                                                    ),
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  onTap:
+                                                                      () async {
+                                                                    await Navigator
+                                                                        .push(
+                                                                      context,
+                                                                      PageTransition(
+                                                                        type: PageTransitionType
+                                                                            .leftToRight,
+                                                                        duration:
+                                                                            Duration(milliseconds: 300),
+                                                                        reverseDuration:
+                                                                            Duration(milliseconds: 300),
+                                                                        child:
+                                                                            ProduktMoreCopyWidget(
+                                                                          productDetail:
+                                                                              columnProductDetailRecord,
+                                                                          product:
+                                                                              mainContainerProduktRecord,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .edit_outlined,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryText,
+                                                                    size: 24.0,
                                                                   ),
-                                                                );
-                                                              },
-                                                              child: Icon(
-                                                                Icons
-                                                                    .edit_outlined,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                size: 24.0,
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,
                                                                         0.0,
                                                                         10.0,
                                                                         0.0),
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
+                                                                child: InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
                                                                       .transparent,
-                                                              onTap: () async {
-                                                                await listViewProductDetailRecord
-                                                                    .reference
-                                                                    .delete();
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  onTap:
+                                                                      () async {
+                                                                    await columnProductDetailRecord
+                                                                        .reference
+                                                                        .delete();
 
-                                                                final cartsUpdateData =
-                                                                    {
-                                                                  'product_Count':
-                                                                      FieldValue
-                                                                          .increment(
+                                                                    final cartsUpdateData =
+                                                                        {
+                                                                      'product_Count':
+                                                                          FieldValue.increment(
                                                                               -(1)),
-                                                                  'cart_Sum': FieldValue.increment(-(listViewProductDetailRecord
-                                                                          .quantity *
-                                                                      listViewProductDetailRecord
-                                                                          .price)),
-                                                                  'Product_Detail_Ref':
-                                                                      FieldValue
-                                                                          .delete(),
-                                                                };
-                                                                await checkOutCartsRecord!
-                                                                    .reference
-                                                                    .update(
-                                                                        cartsUpdateData);
-                                                                setState(() {
-                                                                  FFAppState().removeFromCart(
-                                                                      listViewProductDetailRecord
-                                                                          .productRef!);
-                                                                });
-                                                              },
-                                                              child: Icon(
-                                                                Icons
-                                                                    .delete_sweep,
-                                                                color: Color(
-                                                                    0xDCE21C3D),
-                                                                size: 28.0,
+                                                                      'cart_Sum': FieldValue.increment(-(columnProductDetailRecord
+                                                                              .quantity *
+                                                                          columnProductDetailRecord
+                                                                              .price)),
+                                                                      'Product_Detail_Ref':
+                                                                          FieldValue
+                                                                              .delete(),
+                                                                    };
+                                                                    await checkOutCartsRecord!
+                                                                        .reference
+                                                                        .update(
+                                                                            cartsUpdateData);
+                                                                    setState(
+                                                                        () {
+                                                                      FFAppState()
+                                                                          .removeFromCart(
+                                                                              columnProductDetailRecord.productRef!);
+                                                                    });
+                                                                  },
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .delete_sweep,
+                                                                    color: Color(
+                                                                        0xDCE21C3D),
+                                                                    size: 28.0,
+                                                                  ),
+                                                                ),
                                                               ),
-                                                            ),
+                                                            ],
                                                           ),
-                                                        ],
+                                                        ),
                                                       ),
-                                                    ],
+                                                    );
+                                                  }),
+                                                );
+                                              },
+                                            ),
+                                            if (checkOutCartsRecord!
+                                                    .productCount <
+                                                1)
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 120.0),
+                                                child: Container(
+                                                  height: 200.0,
+                                                  decoration: BoxDecoration(),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 20.0),
+                                                    child: wrapWithModel(
+                                                      model: _model
+                                                          .cartIsEmptyModel,
+                                                      updateCallback: () =>
+                                                          setState(() {}),
+                                                      child:
+                                                          CartIsEmptyWidget(),
+                                                    ),
                                                   ),
                                                 ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
+                                              ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -676,7 +716,7 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                                   Text(
                                                     valueOrDefault<String>(
                                                       '${FFAppState().DeliveryPrice.toString()} руб. ',
-                                                      '0 AED',
+                                                      '0 руб.',
                                                     ),
                                                     textAlign: TextAlign.end,
                                                     style: FlutterFlowTheme.of(
@@ -1020,7 +1060,7 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                                             columnCountOrderRecord!
                                                                     .number +
                                                                 1,
-                                                        orderStatus: 'Active',
+                                                        orderStatus: 'Новый',
                                                         subtotal:
                                                             checkOutCartsRecord!
                                                                 .cartSum,
@@ -1046,9 +1086,11 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                                         deliveryPrice:
                                                             FFAppState()
                                                                 .DeliveryPrice,
-                                                        deliveryMethod:
-                                                            FFAppState()
-                                                                .DelveryIS,
+                                                        deliveryMethod: FFAppState()
+                                                                    .DeliveryPrice >
+                                                                0.0
+                                                            ? 'Доставка курьером'
+                                                            : 'Самовывоз',
                                                       ),
                                                       'Product_List':
                                                           checkOutCartsRecord!
@@ -1118,7 +1160,7 @@ class _CheckOutWidgetState extends State<CheckOutWidget> {
                                                         .showSnackBar(
                                                       SnackBar(
                                                         content: Text(
-                                                          'Вы не можете разместить заказ, пока ваша корзина пуста!',
+                                                          'Вы не можете оформить заказ, так как у Вас пуста корзина, либо  не указан адрес доставки!',
                                                           style: TextStyle(
                                                             color: Color(
                                                                 0xFFF1F4F8),

@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/main.dart';
 import '/pages/category_more/category_more_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,12 +23,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   late HomeModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
-  int get pageViewCurrentIndex => _model.pageViewController != null &&
-          _model.pageViewController!.hasClients &&
-          _model.pageViewController!.page != null
-      ? _model.pageViewController!.page!.round()
-      : 0;
 
   @override
   void initState() {
@@ -41,7 +36,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -50,12 +44,12 @@ class _HomeWidgetState extends State<HomeWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(5.0, 15.0, 5.0, 5.0),
+          padding: EdgeInsetsDirectional.fromSTEB(5.0, 20.0, 5.0, 5.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -119,7 +113,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   onTap: () async {
                                     await launchUrl(Uri(
                                       scheme: 'tel',
-                                      path: '+375291201314',
+                                      path: '+79038105656',
                                     ));
                                   },
                                   child: Image.asset(
@@ -134,57 +128,109 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 135.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              5.0, 10.0, 10.0, 0.0),
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            height: 130.0,
-                            child: PageView(
-                              controller: _model.pageViewController ??=
-                                  PageController(initialPage: 0),
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    child: Image.network(
-                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shoppingapp-ilxleo/assets/bdsmzbyx63ux/Organic-food.jpg',
-                                      width: MediaQuery.of(context).size.width *
-                                          0.9,
-                                      height: 110.0,
-                                      fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: 175.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: StreamBuilder<List<SalesRecord>>(
+                              stream: querySalesRecord(),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: SpinKitCircle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 50.0,
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  child: Image.network(
-                                    'https://c.ndtvimg.com/2020-04/808nac88_fruits-veggies_625x300_16_April_20.jpg',
-                                    width: 100.0,
-                                    height: 100.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  child: Image.network(
-                                    'https://c.ndtvimg.com/2020-01/vksqhsao_vegetables_625x300_13_January_20.jpg',
-                                    width: 100.0,
-                                    height: 100.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ],
+                                  );
+                                }
+                                List<SalesRecord> listViewSalesRecordList =
+                                    snapshot.data!;
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: listViewSalesRecordList.length,
+                                  itemBuilder: (context, listViewIndex) {
+                                    final listViewSalesRecord =
+                                        listViewSalesRecordList[listViewIndex];
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.9,
+                                        height: 170.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 4.0,
+                                              color: Color(0x34090F13),
+                                              offset: Offset(0.0, 2.0),
+                                            )
+                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5.0, 0.0, 5.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      NavBarPage(
+                                                          initialPage: 'Sales'),
+                                                ),
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15.0),
+                                              child: Image.network(
+                                                valueOrDefault<String>(
+                                                  listViewSalesRecord.image,
+                                                  'https://firebasestorage.googleapis.com/v0/b/non-solo-191b2.appspot.com/o/2023-06-09_11-48-38.jpg?alt=media&token=69212dde-3914-4a2d-bf05-fec41a25efb0&_gl=1*27tzac*_ga*MjAxODE3NTE1Ny4xNjgxNDU0MzI2*_ga_CW55HF8NVT*MTY4NjMwMDUyNS4xNi4xLjE2ODYzMDA1NDkuMC4wLjA.',
+                                                ),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    1.0,
+                                                height: 100.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           ),
                         ),

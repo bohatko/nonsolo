@@ -89,13 +89,29 @@ class _OurrestaurantsWidgetState extends State<OurrestaurantsWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
-                        'o0hhtwhl' /* Список ресторанов */,
+                        'o0hhtwhl' /* Наши рестораны на карте */,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
                 ),
               ],
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.95,
+            height: 500.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image.asset(
+                'assets/images/2023-06-09_12-03-00.jpg',
+                width: 300.0,
+                height: 200.0,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ],

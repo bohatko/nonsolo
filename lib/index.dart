@@ -29,7 +29,6 @@ export '/pages/ourrestaurants/ourrestaurants_widget.dart'
     show OurrestaurantsWidget;
 export '/pages/feedback/feedback_widget.dart' show FeedbackWidget;
 export '/pages/bonuses/bonuses_widget.dart' show BonusesWidget;
-export '/pages/payment/payment_widget.dart' show PaymentWidget;
 export '/pages/private_police/private_police_widget.dart'
     show PrivatePoliceWidget;
 export '/pages/term_of_use/term_of_use_widget.dart' show TermOfUseWidget;
@@ -38,3 +37,5 @@ export '/pages/sellingrules/sellingrules_widget.dart' show SellingrulesWidget;
 export '/pages/requisites/requisites_widget.dart' show RequisitesWidget;
 export '/pages/produkt_more_copy/produkt_more_copy_widget.dart'
     show ProduktMoreCopyWidget;
+export '/list6_user_search/list6_user_search_widget.dart'
+    show List6UserSearchWidget;

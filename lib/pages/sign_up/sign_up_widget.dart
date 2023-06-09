@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main.dart';
 import '/pages/login/login_widget.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   late SignUpModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -43,7 +43,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -52,7 +51,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -511,6 +510,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                 _model.yournameController.text,
                                             phoneNumber:
                                                 _model.phoneController.text,
+                                            uid: random_data.randomString(
+                                              20,
+                                              21,
+                                              true,
+                                              false,
+                                              true,
+                                            ),
+                                            status: 'Активный',
                                           ),
                                           'created_time':
                                               FieldValue.serverTimestamp(),

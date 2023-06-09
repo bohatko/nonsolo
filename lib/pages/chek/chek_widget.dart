@@ -26,7 +26,6 @@ class _ChekWidgetState extends State<ChekWidget> {
   late ChekModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -40,7 +39,6 @@ class _ChekWidgetState extends State<ChekWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -69,7 +67,7 @@ class _ChekWidgetState extends State<ChekWidget> {
         }
         List<ProductDetailRecord> chekProductDetailRecordList = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -251,26 +249,49 @@ class _ChekWidgetState extends State<ChekWidget> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Container(
-                                                width: 230.0,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.95,
                                                 height: 51.0,
                                                 decoration: BoxDecoration(
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryBackground,
                                                 ),
-                                                child: Text(
-                                                  columnProductDetailRecord
-                                                      .name,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      columnProductDetailRecord
+                                                          .name,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  10.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        '${columnProductDetailRecord.quantity.toString()}х${columnProductDetailRecord.price.toString()}руб.  = ${(columnProductDetailRecord.quantity * columnProductDetailRecord.price).toString()} руб. ',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                              Text(
-                                                '${columnProductDetailRecord.quantity.toString()}х${columnProductDetailRecord.price.toString()}руб.  = ${(columnProductDetailRecord.quantity * columnProductDetailRecord.price).toString()} руб. ',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
                                               ),
                                             ],
                                           ),
@@ -396,7 +417,7 @@ class _ChekWidgetState extends State<ChekWidget> {
                           style: FlutterFlowTheme.of(context).titleMedium,
                         ),
                         Text(
-                          '\$ ${widget.check!.total.toString()}',
+                          '${widget.check!.total.toString()}руб.',
                           style: FlutterFlowTheme.of(context).headlineSmall,
                         ),
                       ],

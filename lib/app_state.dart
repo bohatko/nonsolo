@@ -79,9 +79,9 @@ class FFAppState extends ChangeNotifier {
 
   void updateCartAtIndex(
     int _index,
-    Function(DocumentReference) updateFn,
+    DocumentReference Function(DocumentReference) updateFn,
   ) {
-    updateFn(_cart[_index]);
+    _cart[_index] = updateFn(_cart[_index]);
     secureStorage.setStringList('ff_cart', _cart.map((x) => x.path).toList());
   }
 

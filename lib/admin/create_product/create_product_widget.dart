@@ -1019,9 +1019,6 @@ class _CreateProductWidgetState extends State<CreateProductWidget>
                                                     .width *
                                                 1.0,
                                             height: 50.0,
-                                            searchHintTextStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium,
@@ -1029,11 +1026,6 @@ class _CreateProductWidgetState extends State<CreateProductWidget>
                                                 FFLocalizations.of(context)
                                                     .getText(
                                               '4qcfzy2b' /* Выберите категорию */,
-                                            ),
-                                            searchHintText:
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                              'j5osyxzq' /* Search for an item... */,
                                             ),
                                             icon: Icon(
                                               Icons.keyboard_arrow_down_rounded,

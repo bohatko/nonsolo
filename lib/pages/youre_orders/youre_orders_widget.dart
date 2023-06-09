@@ -27,7 +27,6 @@ class _YoureOrdersWidgetState extends State<YoureOrdersWidget> {
   late YoureOrdersModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -41,7 +40,6 @@ class _YoureOrdersWidgetState extends State<YoureOrdersWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -71,7 +69,7 @@ class _YoureOrdersWidgetState extends State<YoureOrdersWidget> {
         List<ProductDetailRecord> youreOrdersProductDetailRecordList =
             snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -164,7 +162,7 @@ class _YoureOrdersWidgetState extends State<YoureOrdersWidget> {
                                         .where('User_Ref',
                                             isEqualTo: currentUserReference)
                                         .where('order_status',
-                                            isEqualTo: 'Active'),
+                                            isEqualTo: 'Новый'),
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
@@ -547,7 +545,7 @@ class _YoureOrdersWidgetState extends State<YoureOrdersWidget> {
                                         .where('User_Ref',
                                             isEqualTo: currentUserReference)
                                         .where('order_status',
-                                            isEqualTo: 'Completed'),
+                                            isEqualTo: 'Завершен'),
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
@@ -858,7 +856,7 @@ class _YoureOrdersWidgetState extends State<YoureOrdersWidget> {
                                         .where('User_Ref',
                                             isEqualTo: currentUserReference)
                                         .where('order_status',
-                                            isEqualTo: 'Canceled'),
+                                            isEqualTo: 'Отменен'),
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.

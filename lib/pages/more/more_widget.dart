@@ -3,13 +3,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/bonuses/bonuses_widget.dart';
 import '/pages/feedback/feedback_widget.dart';
-import '/pages/forclients/forclients_widget.dart';
 import '/pages/ourrestaurants/ourrestaurants_widget.dart';
-import '/pages/payment/payment_widget.dart';
 import '/pages/private_police/private_police_widget.dart';
 import '/pages/requisites/requisites_widget.dart';
-import '/pages/sellingrules/sellingrules_widget.dart';
-import '/pages/term_of_use/term_of_use_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,7 +26,6 @@ class _MoreWidgetState extends State<MoreWidget> {
   late MoreModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -44,7 +39,6 @@ class _MoreWidgetState extends State<MoreWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -53,7 +47,7 @@ class _MoreWidgetState extends State<MoreWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -64,6 +58,7 @@ class _MoreWidgetState extends State<MoreWidget> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
@@ -172,31 +167,6 @@ class _MoreWidgetState extends State<MoreWidget> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                8.0, 8.0, 8.0, 8.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PaymentWidget(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'a8ylg9vi' /* Платежи */,
-                                ),
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -212,7 +182,7 @@ class _MoreWidgetState extends State<MoreWidget> {
                       onTap: () async {
                         await launchUrl(Uri(
                           scheme: 'tel',
-                          path: '+375291217221',
+                          path: '+79038105656',
                         ));
                       },
                       child: Container(
@@ -234,38 +204,26 @@ class _MoreWidgetState extends State<MoreWidget> {
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               8.0, 8.0, 8.0, 8.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              await launchUrl(Uri(
-                                scheme: 'tel',
-                                path: '+375291217221',
-                              ));
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.call,
-                                  color: Color(0xFF1602A6),
-                                  size: 30.0,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'jhr6bc21' /* Позвонить нам */,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.call,
+                                color: Color(0xFF1602A6),
+                                size: 30.0,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'jhr6bc21' /* Позвонить нам */,
                                   ),
+                                  textAlign: TextAlign.center,
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -280,10 +238,8 @@ class _MoreWidgetState extends State<MoreWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        await launchUrl(Uri(
-                          scheme: 'tel',
-                          path: '+375291217221',
-                        ));
+                        await launchURL(
+                            'https://wa.me/79038105656?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82!%20%F0%9F%91%8B%20%D0%A3%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81..');
                       },
                       child: Container(
                         width: double.infinity,
@@ -304,36 +260,26 @@ class _MoreWidgetState extends State<MoreWidget> {
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               8.0, 8.0, 8.0, 8.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              await launchURL(
-                                  'https://wa.me/375291217221?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82!%20%F0%9F%91%8B%20%D0%A3%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81..');
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.whatsapp,
-                                  color: Color(0xFF1BAC4B),
-                                  size: 35.0,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'hdso3tpo' /* Написать в WhatsApp */,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.whatsapp,
+                                color: Color(0xFF1BAC4B),
+                                size: 35.0,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'hdso3tpo' /* Написать в WhatsApp */,
                                   ),
+                                  textAlign: TextAlign.center,
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -432,81 +378,6 @@ class _MoreWidgetState extends State<MoreWidget> {
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => TermOfUseWidget(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'jdqrk9ix' /* Правила использования */,
-                                ),
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ForclientsWidget(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'mz6xtrm8' /* Для клиентов */,
-                                ),
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SellingrulesWidget(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  '2r9phtfq' /* Правила продаж */,
-                                ),
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
                                     builder: (context) => RequisitesWidget(),
                                   ),
                                 );
@@ -523,26 +394,25 @@ class _MoreWidgetState extends State<MoreWidget> {
                           Divider(
                             thickness: 1.0,
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'mtviqd2w' /* © 2023,  NON SOLO
-Версия 1.0.1 */
-                                    ,
-                                  ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                ),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'mtviqd2w' /* © 2023,  NON SOLO
+Версия 1.0.1 */
+                            ,
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                      ],
                     ),
                   ),
                 ],

@@ -71,6 +71,14 @@ class CategoryProduktRecord extends FirestoreRecord {
   @override
   String toString() =>
       'CategoryProduktRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is CategoryProduktRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createCategoryProduktRecordData({

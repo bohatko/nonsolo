@@ -630,18 +630,11 @@ class _CreateUserWidgetState extends State<CreateUserWidget>
                                           () => _model.dropDownValue = val),
                                       width: 200.0,
                                       height: 50.0,
-                                      searchHintTextStyle:
-                                          FlutterFlowTheme.of(context)
-                                              .labelMedium,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                       hintText:
                                           FFLocalizations.of(context).getText(
                                         'yxyv3lev' /* Please select... */,
-                                      ),
-                                      searchHintText:
-                                          FFLocalizations.of(context).getText(
-                                        '50m3jgni' /* Search for an item... */,
                                       ),
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,

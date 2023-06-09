@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/main.dart';
 import '/pages/category_more/category_more_widget.dart';
 import '/flutter_flow/request_manager.dart';
 
@@ -14,8 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 class HomeModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for PageView widget.
-  PageController? pageViewController;
+  final unfocusNode = FocusNode();
 
   /// Query cache managers for this widget.
 
@@ -39,10 +39,14 @@ class HomeModel extends FlutterFlowModel {
   void initState(BuildContext context) {}
 
   void dispose() {
+    unfocusNode.dispose();
+
     /// Dispose query cache managers for this widget.
 
     clearHomeCache();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

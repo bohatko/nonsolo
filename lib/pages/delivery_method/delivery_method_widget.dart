@@ -23,7 +23,6 @@ class _DeliveryMethodWidgetState extends State<DeliveryMethodWidget> {
   late DeliveryMethodModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -38,7 +37,6 @@ class _DeliveryMethodWidgetState extends State<DeliveryMethodWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -47,7 +45,7 @@ class _DeliveryMethodWidgetState extends State<DeliveryMethodWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -148,9 +146,7 @@ class _DeliveryMethodWidgetState extends State<DeliveryMethodWidget> {
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                      '2gdq77wd' /* Выберите ресторан из
- который ... */
-                                                      ,
+                                                      '2gdq77wd' /* Выберите ресторан, в котором  ... */,
                                                     ),
                                                     textAlign: TextAlign.center,
                                                     style: FlutterFlowTheme.of(
@@ -172,12 +168,7 @@ class _DeliveryMethodWidgetState extends State<DeliveryMethodWidget> {
                                                       FFLocalizations.of(
                                                               context)
                                                           .getText(
-                                                        '4xfk3t6v' /* Калуга, ул. Советская 19 */,
-                                                      ),
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        '7ug38tn8' /* Калуга, ул. Интернациональная ... */,
+                                                        '7ug38tn8' /* г. Калуга.  Улица Степана Рази... */,
                                                       )
                                                     ],
                                                     onChanged: (val) =>
@@ -190,17 +181,6 @@ class _DeliveryMethodWidgetState extends State<DeliveryMethodWidget> {
                                                                 .width *
                                                             1.0,
                                                     height: 50.0,
-                                                    searchHintTextStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyLarge
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Poppins',
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                            ),
                                                     textStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -210,12 +190,6 @@ class _DeliveryMethodWidgetState extends State<DeliveryMethodWidget> {
                                                                 context)
                                                             .getText(
                                                       'rnsre7l0' /* Выберите адрес ресторана */,
-                                                    ),
-                                                    searchHintText:
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                      'fnc65ew1' /* Dubai */,
                                                     ),
                                                     fillColor: FlutterFlowTheme
                                                             .of(context)
@@ -311,7 +285,7 @@ class _DeliveryMethodWidgetState extends State<DeliveryMethodWidget> {
                                                 labelText:
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                  'g6yqcx9t' /* Введите адрес доставки */,
+                                                  'g6yqcx9t' /* г. Калуга, улица, дом, квартир... */,
                                                 ),
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
